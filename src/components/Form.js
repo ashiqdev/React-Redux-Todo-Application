@@ -1,12 +1,16 @@
 import React from 'react';
 import UseInputState from '../hooks/useInputState';
+import { addTodoAction } from '../store/action/actions';
+import { useDispatch } from 'react-redux';
 
-const Form = ({ addTodo }) => {
+const Form = () => {
   const [value, onChangeHandler, reset] = UseInputState('');
+  // const { todos } = useSelector((state) => state);
+  const dispatch = useDispatch();
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    addTodo(value);
+    dispatch(addTodoAction(value));
     reset();
   };
   return (
@@ -19,7 +23,7 @@ const Form = ({ addTodo }) => {
         placeholder='Enter a task...'
         required
       />
-      <button className='form__button'>Add Task</button> 
+      <button className='form__button'>Add Task</button>
     </form>
   );
 };

@@ -2,24 +2,27 @@ import React from 'react';
 import useEditState from '../hooks/useEditState';
 import EditTodoForm from './EditTodoForm';
 import { TiEdit, TiDelete } from 'react-icons/ti';
+import { toggleTodoAction, removeTodoAction } from '../store/action/actions';
+import { useDispatch } from 'react-redux';
 
-const Todo = ({ todo, toggleTodo, deleteTodo, editTodo }) => {
+const Todo = ({ todo }) => {
   const [isEdit, toggle] = useEditState(false);
+  const dispatch = useDispatch();
 
   const handleDelete = (id) => {
-    deleteTodo(id);
-  }; 
+    dispatch(removeTodoAction(id));
+  };
   return (
     <li className='listItem'>
       {isEdit ? (
-        <EditTodoForm editTodo={editTodo} toggle={toggle} todo={todo} />
+        <EditTodoForm toggle={toggle} todo={todo} />
       ) : (
         <div className='round'>
           <input
             type='checkbox'
             id={`checkbox ${todo.id}`}
             checked={todo.completed}
-            onChange={() => toggleTodo(todo.id)}
+            onChange={() => dispatch(toggleTodoAction(todo.id))}
           />
           <label htmlFor={`checkbox ${todo.id}`}></label>
 
@@ -32,7 +35,10 @@ const Todo = ({ todo, toggleTodo, deleteTodo, editTodo }) => {
             <div className='icon icon-edit' onClick={toggle}>
               <TiEdit />
             </div>
-            <div className='icon icon-delete' onClick={() => handleDelete(todo.id)}>
+            <div
+              className='icon icon-delete'
+              onClick={() => handleDelete(todo.id)}
+            >
               <TiDelete />
             </div>
           </div>
