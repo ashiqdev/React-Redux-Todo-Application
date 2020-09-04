@@ -2,7 +2,6 @@ import React from 'react';
 import Todo from './Todo';
 
 const TodoList = ({ todos, toggleTodo, deleteTodo, editTodo }) => {
-  console.log(todos);
   return (
     <ul className='todoList'>
       {todos?.map((todo) => (
@@ -18,4 +17,4 @@ const TodoList = ({ todos, toggleTodo, deleteTodo, editTodo }) => {
   );
 };
 
-export default TodoList;
+export default TodoList; 

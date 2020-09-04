@@ -19,7 +19,7 @@ const Form = ({ addTodo }) => {
         placeholder='Enter a task...'
         required
       />
-      <button className='form__button'>Add Task</button>
+      <button className='form__button'>Add Task</button> 
     </form>
   );
 };

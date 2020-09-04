@@ -27,7 +27,7 @@ const TodoApp = () => {
       ? todos.filter((todo) => todo.completed === completed)
       : todos;
 
-  const numberOfActiveTasks = todos.filter((todo) => todo.completed === false)
+  const numberOfActiveTasks = todos.filter((todo) => todo.completed === false) 
     .length;
 
   return (

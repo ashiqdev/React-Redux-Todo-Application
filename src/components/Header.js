@@ -8,7 +8,7 @@ const Header = ({
   numberOfActiveTasks,
   completed,
 }) => {
-  const handleCompleted = (e) => {
+  const handleCompleted = (e) => { 
     completedTasks();
   };
 
@@ -38,7 +38,7 @@ const Header = ({
             Incomplete Tasks
           </div>
           <div
-            className={`header__details-incomplete ${
+            className={`header__details-incomplete ${ 
               completed && 'dragon'
             }`}
             onClick={handleCompleted}

@@ -8,7 +8,7 @@ const Todo = ({ todo, toggleTodo, deleteTodo, editTodo }) => {
 
   const handleDelete = (id) => {
     deleteTodo(id);
-  };
+  }; 
   return (
     <li className='listItem'>
       {isEdit ? (

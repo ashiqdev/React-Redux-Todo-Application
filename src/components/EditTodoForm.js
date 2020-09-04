@@ -6,7 +6,6 @@ const EditTodoForm = ({ todo, editTodo, toggle }) => {
   
   const handleSubmit = (e) => {
     e.preventDefault();
-    // console.log(todo.id);
     editTodo(todo.id, value);
     reset();
     toggle(false);
