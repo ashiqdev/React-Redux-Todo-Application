@@ -1,20 +1,14 @@
 import React from 'react';
 import Todo from './Todo';
 
-const TodoList = ({ todos, toggleTodo, deleteTodo, editTodo }) => {
+const TodoList = ({ todos }) => {
   return (
     <ul className='todoList'>
       {todos?.map((todo) => (
-        <Todo
-          key={todo.id}
-          todo={todo}
-          toggleTodo={toggleTodo}
-          deleteTodo={deleteTodo}
-          editTodo={editTodo}
-        />
+        <Todo key={todo.id} todo={todo} />
       ))}
     </ul>
   );
 };
 
-export default TodoList; 
+export default TodoList;

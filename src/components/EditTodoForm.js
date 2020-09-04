@@ -1,17 +1,19 @@
 import React from 'react';
 import useInputState from '../hooks/useInputState';
+import { editTodoAction } from '../store/action/actions';
+import { useDispatch } from 'react-redux';
 
-const EditTodoForm = ({ todo, editTodo, toggle }) => {
+const EditTodoForm = ({ todo, toggle }) => {
   const [value, handleChange, reset] = useInputState(todo.task);
-  
+  const dispatch = useDispatch();
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    editTodo(todo.id, value);
+    dispatch(editTodoAction({ id: todo.id, task: value }));
     reset();
     toggle(false);
-
   };
-  
+
   return (
     <form onSubmit={handleSubmit}>
       <input

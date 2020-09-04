@@ -1,52 +1,40 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import Header from './Header';
-import useTodoState from '../hooks/useTodoState';
 import TodoList from './TodoList';
 import Form from './Form';
+import { useSelector} from 'react-redux';
 
 const TodoApp = () => {
-  const initialTodos = JSON.parse(window.localStorage.getItem('todos') || '[]');
-  const {
-    todos,
-    addTodo,
-    toggleTodo,
-    deleteTodo,
-    editTodo,
-    completed,
-    incompleteTasks,
-    completedTasks,
-    allTasks,
-  } = useTodoState(initialTodos);
+  // const initialTodos = JSON.parse(window.localStorage.getItem('todos') || '[]');
+  const [completed, setCompleted] = useState(null);
 
-  useEffect(() => {
-    window.localStorage.setItem('todos', JSON.stringify(todos));
-  }, [todos]);
+  const incompleteTasks = () => setCompleted(false);
+
+  const completedTasks = () => setCompleted(true);
+
+  const allTasks = () => setCompleted(null);
+
+  const { todos } = useSelector((state) => state);
 
   const filteredTodos =
     completed !== null
       ? todos.filter((todo) => todo.completed === completed)
       : todos;
 
-  const numberOfActiveTasks = todos.filter((todo) => todo.completed === false) 
+  const numberOfActiveTasks = todos.filter((todo) => todo.completed === false)
     .length;
 
   return (
     <div className='wrapper'>
       <Header
-        addTodo={addTodo}
         incompleteTasks={incompleteTasks}
         completedTasks={completedTasks}
         allTasks={allTasks}
         numberOfActiveTasks={numberOfActiveTasks}
         completed={completed}
       />
-      <Form addTodo={addTodo} />
-      <TodoList
-        todos={filteredTodos}
-        toggleTodo={toggleTodo}
-        deleteTodo={deleteTodo}
-        editTodo={editTodo}
-      />
+      <Form/>
+      <TodoList todos={filteredTodos} />
     </div>
   );
 };
