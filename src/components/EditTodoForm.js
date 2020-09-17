@@ -1,6 +1,7 @@
 import React from 'react';
 import useInputState from '../hooks/useInputState';
-import { editTodoAction } from '../store/action/actions';
+// import { editTodoAction } from '../store/action/actions';
+import {editTodo} from '../store/reducer/todoReducer';
 import { useDispatch } from 'react-redux';
 
 const EditTodoForm = ({ todo, toggle }) => {
@@ -9,7 +10,7 @@ const EditTodoForm = ({ todo, toggle }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(editTodoAction({ id: todo.id, task: value }));
+    dispatch(editTodo({ id: todo.id, task: value }));
     reset();
     toggle(false);
   };

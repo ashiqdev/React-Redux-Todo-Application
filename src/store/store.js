@@ -1,7 +1,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-import reducer from './reducer/index';
+import todoreducer from './reducer/todoReducer';
+import { configureStore } from '@reduxjs/toolkit';
 
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
@@ -13,12 +13,18 @@ const persistConfig = {
   whitelist: ['todos'],
 };
 
-const persistedReducer = persistReducer(persistConfig, reducer);
+const persistedReducer = persistReducer(persistConfig, todoreducer);
 
-const store = createStore(
-  persistedReducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-);
+// const store = createStore(
+//   persistedReducer,
+//   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+// );
+
+const store = configureStore({
+  reducer: {
+    todos: todoreducer,
+  },
+});
 
 const persistor = persistStore(store);
 
@@ -26,9 +32,9 @@ const persistor = persistStore(store);
 const StateProvider = ({ children }) => {
   return (
     <Provider store={store}>
-      <PersistGate loading={<div>Loading...</div>} persistor={persistor}>
-        {children}
-      </PersistGate>
+      {/* <PersistGate loading={<div>Loading...</div>} persistor={persistor}> */}
+      {children}
+      {/* </PersistGate> */}
     </Provider>
   );
 };

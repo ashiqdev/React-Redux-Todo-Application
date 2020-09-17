@@ -2,7 +2,8 @@ import React from 'react';
 import useEditState from '../hooks/useEditState';
 import EditTodoForm from './EditTodoForm';
 import { TiEdit, TiDelete } from 'react-icons/ti';
-import { toggleTodoAction, removeTodoAction } from '../store/action/actions';
+// import { toggleTodoAction, removeTodoAction } from '../store/action/actions';
+import {toggleTodo, deleteTodo} from '../store/reducer/todoReducer';
 import { useDispatch } from 'react-redux';
 
 const Todo = ({ todo }) => {
@@ -10,7 +11,7 @@ const Todo = ({ todo }) => {
   const dispatch = useDispatch();
 
   const handleDelete = (id) => {
-    dispatch(removeTodoAction(id));
+    dispatch(deleteTodo(id));
   };
   return (
     <li className='listItem'>
@@ -22,7 +23,7 @@ const Todo = ({ todo }) => {
             type='checkbox'
             id={`checkbox ${todo.id}`}
             checked={todo.completed}
-            onChange={() => dispatch(toggleTodoAction(todo.id))}
+            onChange={() => dispatch(toggleTodo(todo.id))}
           />
           <label htmlFor={`checkbox ${todo.id}`}></label>
 

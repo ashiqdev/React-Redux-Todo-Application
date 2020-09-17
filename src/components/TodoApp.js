@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from './Header';
 import TodoList from './TodoList';
 import Form from './Form';
-import { useSelector} from 'react-redux';
+import { useSelector } from 'react-redux';
 
 const TodoApp = () => {
-  // const initialTodos = JSON.parse(window.localStorage.getItem('todos') || '[]');
   const [completed, setCompleted] = useState(null);
 
   const incompleteTasks = () => setCompleted(false);
@@ -14,7 +13,12 @@ const TodoApp = () => {
 
   const allTasks = () => setCompleted(null);
 
-  const { todos } = useSelector((state) => state);
+  // const { todos } = useSelector((state) => state);
+  const todos = useSelector((state) => state.todos);
+
+  useEffect(() => {
+    window.localStorage.setItem('todos', JSON.stringify(todos));
+  }, [todos]);
 
   const filteredTodos =
     completed !== null
@@ -33,7 +37,7 @@ const TodoApp = () => {
         numberOfActiveTasks={numberOfActiveTasks}
         completed={completed}
       />
-      <Form/>
+      <Form />
       <TodoList todos={filteredTodos} />
     </div>
   );

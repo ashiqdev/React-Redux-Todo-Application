@@ -1,7 +1,8 @@
 import React from 'react';
 import UseInputState from '../hooks/useInputState';
-import { addTodoAction } from '../store/action/actions';
+// import { addTodoAction } from '../store/action/actions';
 import { useDispatch } from 'react-redux';
+import { addTodo } from '../store/reducer/todoReducer';
 
 const Form = () => {
   const [value, onChangeHandler, reset] = UseInputState('');
@@ -10,7 +11,7 @@ const Form = () => {
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    dispatch(addTodoAction(value));
+    dispatch(addTodo(value));
     reset();
   };
   return (
